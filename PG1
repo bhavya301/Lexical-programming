@@ -1,0 +1,27 @@
+
+
+> makeCacheMatrix <- function(x = matrix()) {                   #taking the matrix to be inversed
++     i <- NULL                                                 #NULL
++   set <- function(y) {                                        #nesting the cuntion to get a returned value
++           x <<- y
++           i <<- NULL
++   }
++   get <- function(x)                        
++   setinverse <- function(inverse) i <<- inverse               #setting the inverse matrix  
++   getinverse <- function() i                                  #function to obtain the inverse matrix
++   list(set = set,
++        get = get,
++        setinverse = setinverse,
++        getinverse = getinverse)                                #returning the value of the inverse matrix
++ }
+> cacheSolve <- function(x, ...) {                               #function for part2- cachesolve
++   i <- x$getinverse()                                          #inputting the inverse matrix
++   if (!is.null(i)) {                                           #checking if the inverse matrix exists
++           message("getting cached data")                       #retrieving the cached data
++           return(i)
++   }
++   data <- x$get()                                             #processing the cached data obtained   
++   i <- solve(data, ...)                                         
++   x$setinverse(i)                                             #displaying the end solution
++   i
++ }
